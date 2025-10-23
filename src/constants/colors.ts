@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 export const lightTheme = {
-  primary: "#E6F52D",
-  secondary: "#F1FA7E",
-  background: "#000000",
+  primary: "#d1e400",
+  secondary: "#444901",
+  background: "#FFFFFF",
   text: "#000000",
   textSecondary: "#666666",
   textPlaceholder: "#A0A0A0",
@@ -16,8 +16,8 @@ export const lightTheme = {
   gray: "#F5F5F5",
 };
 export const darkTheme = {
-  primary: "#E6F52D",
-  secondary: "#F1FA7E",
+  primary: "#96a300",
+  secondary: "#666d01",
   background: "#000000",
   text: "#FFFFFF",
   textSecondary: "#999999",

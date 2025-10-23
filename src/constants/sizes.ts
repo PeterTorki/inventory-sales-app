@@ -21,6 +21,7 @@ export const sizes = {
     m: 24,
     l: 32,
     xl: 40,
+    xxl: 50,
   },
 
   button: {
