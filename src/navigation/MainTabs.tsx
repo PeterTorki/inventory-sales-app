@@ -7,11 +7,11 @@ import TransactionsNavigator from "./TransactionsStack";
 import { useColors } from "../constants/colors";
 import { sizes } from "../constants/sizes";
 import { fonts } from "../constants/fonts";
-import { MainTabsParamList } from "../types/mainTabsTypes";
+import { MainTabsParamList } from "../types/navigation/mainTabsTypes";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { hs, ms, width } from "../utils/metrics";
-import { MainTabProps } from "../types/mainStackTypes";
+import { MainTabProps } from "../types/navigation/mainStackTypes";
 
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 

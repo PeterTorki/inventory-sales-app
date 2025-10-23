@@ -1,7 +1,7 @@
 // navigation/CustomersStack.tsx
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { CustomersStackParamList } from "../types/customersStackTypes";
+import { CustomersStackParamList } from "../types/navigation/customersStackTypes";
 import CustomerListScreen from "../screens/customers/CustomerListScreen";
 import AddCustomerScreen from "../screens/customers/AddCustomerScreen";
 import EditCustomerScreen from "../screens/customers/EditCustomerScreen";

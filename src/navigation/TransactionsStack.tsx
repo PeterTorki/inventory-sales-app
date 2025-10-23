@@ -1,7 +1,7 @@
 // navigation/TransactionsStack.tsx
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { TransactionsStackParamList } from "../types/transactionsStackTypes";
+import { TransactionsStackParamList } from "../types/navigation/transactionsStackTypes";
 import InvoiceListScreen from "../screens/transactions/InvoiceListScreen";
 import CreateInvoiceScreen from "../screens/transactions/CreateInvoiceScreen";
 import InvoiceDetailScreen from "../screens/transactions/InvoiceDetailScreen";

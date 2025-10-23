@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { MainStackParamList } from "../types/mainStackTypes";
+import { MainStackParamList } from "../types/navigation/mainStackTypes";
 import MainTabNavigator from "./MainTabs";
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();

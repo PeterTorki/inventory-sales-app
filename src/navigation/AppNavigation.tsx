@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../types/rootStackTypes";
+import { RootStackParamList } from "../types/navigation/rootStackTypes";
 import AuthNavigator from "./AuthStack";
 import MainNavigator from "./MainStack";
 import { ActivityIndicator, View, StyleSheet } from "react-native";

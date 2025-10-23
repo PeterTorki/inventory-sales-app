@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ItemsStackParamList } from "../types/itemsStackTypes";
+import { ItemsStackParamList } from "../types/navigation/itemsStackTypes";
 import ItemListScreen from "../screens/items/ItemListScreen";
 import AddItemScreen from "../screens/items/AddItemScreen";
 import EditItemScreen from "../screens/items/EditItemScreen";
