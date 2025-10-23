@@ -3,7 +3,7 @@ import { useState } from "react";
 export const lightTheme = {
   primary: "#E6F52D",
   secondary: "#F1FA7E",
-  background: "#FFFFFF",
+  background: "#000000",
   text: "#000000",
   textSecondary: "#666666",
   textPlaceholder: "#A0A0A0",
