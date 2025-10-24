@@ -1,5 +1,6 @@
+import { colors } from "./colors";
+
 export const typography = {
-  // Headings
   h1: {
     fontSize: 32,
     fontWeight: "700" as const,
@@ -37,7 +38,6 @@ export const typography = {
     letterSpacing: 0,
   },
 
-  // Body text
   bodyLarge: {
     fontSize: 18,
     fontWeight: "400" as const,
@@ -77,7 +77,6 @@ export const typography = {
     textTransform: "uppercase" as const,
   },
 
-  // Interactive elements
   button: {
     fontSize: 16,
     fontWeight: "600" as const,
@@ -89,5 +88,12 @@ export const typography = {
     fontWeight: "600" as const,
     lineHeight: 20,
     letterSpacing: 0,
+  },
+  shadow: {
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 8,
   },
 };
