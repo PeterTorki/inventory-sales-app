@@ -1,9 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DashboardScreen from "../screens/DashboardScreen/DashboardScreen";
-import ItemsNavigator from "./ItemsStack";
-import CustomersNavigator from "./CustomersStack";
-import TransactionsNavigator from "./TransactionsStack";
 import { colors } from "../constants/colors";
 import { sizes } from "../constants/sizes";
 import { MainTabsParamList } from "../types/navigation/mainTabsTypes";
@@ -14,6 +11,7 @@ import { MainTabProps } from "../types/navigation/mainStackTypes";
 import ItemListScreen from "../screens/items/ItemListScreen";
 import CustomerListScreen from "../screens/customers/CustomerListScreen";
 import InvoiceDetailScreen from "../screens/transactions/InvoiceDetailScreen";
+import { withSafeArea } from "./withSafeArea";
 
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 
@@ -32,10 +30,6 @@ function getTabBarIcon(
     </View>
   );
 }
-
-const ScreenContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <View style={{ flex: 1, paddingHorizontal: hs(20) }}>{children}</View>
-);
 
 const MainTabNavigator: React.FC<MainTabProps> = () => {
   return (
@@ -60,52 +54,40 @@ const MainTabNavigator: React.FC<MainTabProps> = () => {
         options={{
           title: "Dashboard",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "home-outline"),
-        }}>
-        {() => (
-          <ScreenContainer>
-            <DashboardScreen />
-          </ScreenContainer>
-        )}
-      </MainTabs.Screen>
+        }}
+        component={withSafeArea(DashboardScreen, {
+          scrollable: false,
+          noPadding: true,
+          backgroundColor: colors.primary,
+        })}
+      />
 
       <MainTabs.Screen
         name="Items"
         options={{
           title: "Items",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "cube-outline"),
-        }}>
-        {() => (
-          <ScreenContainer>
-            <ItemListScreen />
-          </ScreenContainer>
-        )}
-      </MainTabs.Screen>
+        }}
+        component={withSafeArea(ItemListScreen)}
+      />
 
       <MainTabs.Screen
         name="Customers"
         options={{
           title: "Customers",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "people-outline"),
-        }}>
-        {() => (
-          <ScreenContainer>
-            <CustomerListScreen />
-          </ScreenContainer>
-        )}
-      </MainTabs.Screen>
+        }}
+        component={withSafeArea(CustomerListScreen)}
+      />
 
       <MainTabs.Screen
         name="Transactions"
         options={{
           title: "Transactions",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "receipt-outline"),
-        }}>
-        {() => (
-          <ScreenContainer>
-            <InvoiceDetailScreen />
-          </ScreenContainer>
-        )}
-      </MainTabs.Screen>
+        }}
+        component={withSafeArea(InvoiceDetailScreen)}
+      />
     </MainTabs.Navigator>
   );
 };

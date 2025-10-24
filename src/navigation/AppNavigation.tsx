@@ -5,6 +5,7 @@ import { RootStackParamList } from "../types/navigation/rootStackTypes";
 import AuthNavigator from "./AuthStack";
 import MainNavigator from "./MainStack";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -22,6 +23,7 @@ const AppNavigation: React.FC = () => {
 
   return (
     <NavigationContainer>
+      
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthenticated ? (
           <RootStack.Screen name="MainStack" component={MainNavigator} />
