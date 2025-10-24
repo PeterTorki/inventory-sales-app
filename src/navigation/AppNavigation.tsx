@@ -11,7 +11,7 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigation: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   if (isLoading) {
     return (
@@ -23,7 +23,6 @@ const AppNavigation: React.FC = () => {
 
   return (
     <NavigationContainer>
-      
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthenticated ? (
           <RootStack.Screen name="MainStack" component={MainNavigator} />
