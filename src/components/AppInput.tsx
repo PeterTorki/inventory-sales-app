@@ -1,171 +1,248 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
-// import { colors, spacing, borderRadius, typography, shadows } from "../styles/theme";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  TextInputProps,
+  DimensionValue,
+} from "react-native";
+import AppText from "./AppText";
 import { colors } from "../constants/colors";
 import { typography } from "../constants/fonts";
 import { sizes } from "../constants/sizes";
 
-interface InputFieldProps {
-  label: string;
+interface AppInputProps extends Omit<TextInputProps, "style"> {
+  label?: string;
+  error?: string;
+  hint?: string;
   value: string;
   onChangeText: (text: string) => void;
-  placeholder: string;
-  keyboardType?: "default" | "numeric" | "email-address" | "phone-pad";
-  error?: string;
-  required?: boolean;
+  placeholder?: string;
+  variant?: "outline" | "filled" | "underline";
+  size?: "s" | "m" | "l";
+  disabled?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  onRightIconPress?: () => void;
+  width?: DimensionValue;
+  radius?: keyof typeof sizes.radius;
+  mt?: number;
+  mb?: number;
+  mh?: number;
+  backgroundColor?: string;
+  borderColor?: string;
+  textColor?: string;
+  labelColor?: string;
+  errorColor?: string;
+  hintColor?: string;
+  placeholderColor?: string;
+  showCharacterCount?: boolean;
+  maxLength?: number;
+  containerStyle?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<TextStyle>;
+  labelStyle?: StyleProp<TextStyle>;
   multiline?: boolean;
   numberOfLines?: number;
-  disabled?: boolean;
-  leftIcon?: string;
-  rightIcon?: string;
-  onRightIconPress?: () => void;
-  secureTextEntry?: boolean;
+  required?: boolean;
   autoFocus?: boolean;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+const AppInput: React.FC<AppInputProps> = ({
   label,
+  error,
+  hint,
   value,
   onChangeText,
   placeholder,
-  keyboardType = "default",
-  error,
-  required = false,
-  multiline = false,
-  numberOfLines = 1,
+  variant = "outline",
+  size = "m",
   disabled = false,
   leftIcon,
   rightIcon,
   onRightIconPress,
-  secureTextEntry = false,
+  width = "100%",
+  radius = "md",
+  mt = 0,
+  mb = sizes.spacing.lg,
+  mh = 0,
+  backgroundColor,
+  borderColor,
+  textColor,
+  labelColor,
+  errorColor,
+  hintColor,
+  placeholderColor,
+  showCharacterCount = false,
+  maxLength,
+  containerStyle,
+  inputStyle,
+  labelStyle,
+  multiline = false,
+  numberOfLines = 1,
+  required = false,
   autoFocus = false,
+  ...textInputProps
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  const getInputStyle = () => {
-    return [
-      styles.input,
-      isFocused && !error && styles.inputFocused,
-      error && styles.inputError,
-      disabled && styles.inputDisabled,
-      multiline && styles.multilineInput,
-      leftIcon && styles.inputWithLeftIcon,
-      rightIcon && styles.inputWithRightIcon,
-    ].filter(Boolean);
-  };
+  const inputHeight = multiline ? sizes.input[size] * (numberOfLines || 3) : sizes.input[size];
+
+  const variantStyles = {
+    outline: {
+      bg: backgroundColor ?? colors.background,
+      border: error ? errorColor ?? colors.error : isFocused ? colors.primary : borderColor ?? colors.border,
+      borderWidth: 1.5,
+    },
+    filled: {
+      bg: backgroundColor ?? colors.surface,
+      border: error ? errorColor ?? colors.error : isFocused ? colors.primary : "transparent",
+      borderWidth: isFocused || error ? 1.5 : 0,
+    },
+    underline: {
+      bg: "transparent",
+      border: error ? errorColor ?? colors.error : isFocused ? colors.primary : borderColor ?? colors.border,
+      borderWidth: 0,
+      borderBottomWidth: 1.5,
+    },
+  }[variant];
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
 
   return (
-    <View style={styles.inputContainer}>
+    <View
+      style={[
+        {
+          width,
+          marginTop: mt,
+          marginBottom: mb,
+          marginHorizontal: mh,
+        },
+        containerStyle,
+      ]}>
       {label && (
-        <Text style={styles.inputLabel}>
-          {label} {required && <Text style={styles.required}>*</Text>}
-        </Text>
+        <View style={styles.labelContainer}>
+          <AppText variant="label" color={labelColor ?? colors.text} style={[styles.label, labelStyle]}>
+            {label}
+            {required && <AppText color={errorColor ?? colors.error}> *</AppText>}
+          </AppText>
+        </View>
       )}
-      <View style={styles.inputWrapper}>
-        {leftIcon && (
-          <View style={styles.leftIconContainer}>
-            <Text style={styles.iconText}>{leftIcon}</Text>
-          </View>
-        )}
+
+      <View
+        style={[
+          {
+            backgroundColor: disabled ? colors.shadowDark : variantStyles.bg,
+            borderColor: disabled ? colors.border : variantStyles.border,
+            borderWidth: variantStyles.borderWidth,
+            borderBottomWidth: variant === "underline" ? variantStyles.borderWidth : variantStyles.borderWidth,
+            borderRadius: variant === "underline" ? 0 : sizes.radius[radius],
+            height: inputHeight,
+            flexDirection: "row",
+            alignItems: multiline ? "flex-start" : "center",
+            paddingHorizontal: sizes.spacing.md,
+            paddingVertical: multiline ? sizes.spacing.sm : 0,
+            opacity: disabled ? 0.6 : 1,
+          },
+          error && styles.inputError,
+        ]}>
+        {leftIcon && <View style={styles.iconContainer}>{leftIcon}</View>}
+
         <TextInput
-          style={getInputStyle()}
+          style={[
+            {
+              flex: 1,
+              ...typography.body,
+              lineHeight: 0,
+              height: "auto",
+              color: textColor ?? colors.text,
+              padding: 0,
+              textAlignVertical: multiline ? "top" : "center",
+            },
+            inputStyle,
+          ]}
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          keyboardType={keyboardType}
-          autoCapitalize={keyboardType === "email-address" ? "none" : "words"}
+          placeholderTextColor={placeholderColor ?? colors.textTertiary}
+          editable={!disabled}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          maxLength={maxLength}
           multiline={multiline}
           numberOfLines={numberOfLines}
-          placeholderTextColor={colors.textTertiary}
-          editable={!disabled}
-          secureTextEntry={secureTextEntry}
           autoFocus={autoFocus}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          {...textInputProps}
         />
+
         {rightIcon && (
-          <TouchableOpacity style={styles.rightIconContainer} onPress={onRightIconPress} disabled={!onRightIconPress}>
-            <Text style={styles.iconText}>{rightIcon}</Text>
+          <TouchableOpacity onPress={onRightIconPress} disabled={!onRightIconPress} style={styles.iconContainer}>
+            {rightIcon}
           </TouchableOpacity>
         )}
       </View>
-      {error && <Text style={styles.errorText}>{error}</Text>}
+
+      <View style={styles.bottomContainer}>
+        <View style={styles.messageContainer}>
+          {error ? (
+            <AppText variant="caption" color={errorColor ?? colors.error} style={styles.errorText}>
+              {error}
+            </AppText>
+          ) : hint ? (
+            <AppText variant="caption" color={hintColor ?? colors.textTertiary} style={styles.hintText}>
+              {hint}
+            </AppText>
+          ) : null}
+        </View>
+
+        {showCharacterCount && maxLength && (
+          <AppText variant="caption" color={colors.textTertiary} style={styles.characterCount}>
+            {value.length}/{maxLength}
+          </AppText>
+        )}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    marginBottom: sizes.spacing.lg,
-  },
-  inputLabel: {
-    ...typography.label,
-    color: colors.text,
+  labelContainer: {
     marginBottom: sizes.spacing.sm,
   },
-  required: {
-    color: colors.error,
-  },
-  inputWrapper: {
-    position: "relative",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  input: {
-    backgroundColor: colors.surface,
-    borderRadius: sizes.radius.md,
-    padding: sizes.spacing.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    minHeight: 48,
-    flex: 1,
-    ...typography.body,
-  },
-  inputFocused: {
-    borderColor: colors.focus,
-    borderWidth: 2,
+  label: {
+    marginBottom: 0,
   },
   inputError: {
-    borderColor: colors.error,
-    borderWidth: 1,
+    backgroundColor: colors.errorLight,
   },
-  inputDisabled: {
-    backgroundColor: colors.borderLight,
-    color: colors.textTertiary,
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: sizes.spacing.xs,
   },
-  multilineInput: {
-    minHeight: 80,
-    textAlignVertical: "top",
-    paddingTop: sizes.spacing.md,
+  bottomContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginTop: sizes.spacing.xs,
+    minHeight: 18,
   },
-  inputWithLeftIcon: {
-    paddingLeft: 40,
-  },
-  inputWithRightIcon: {
-    paddingRight: 40,
-  },
-  leftIconContainer: {
-    position: "absolute",
-    left: sizes.spacing.md,
-    zIndex: 1,
-    paddingRight: sizes.spacing.sm,
-  },
-  rightIconContainer: {
-    position: "absolute",
-    right: sizes.spacing.md,
-    zIndex: 1,
-    paddingLeft: sizes.spacing.sm,
-  },
-  iconText: {
-    fontSize: 18,
-    color: colors.textSecondary,
+  messageContainer: {
+    flex: 1,
   },
   errorText: {
-    ...typography.caption,
-    color: colors.error,
-    marginTop: sizes.spacing.xs,
     marginLeft: sizes.spacing.xs,
+  },
+  hintText: {
+    marginLeft: sizes.spacing.xs,
+  },
+  characterCount: {
+    marginLeft: sizes.spacing.sm,
   },
 });
 
-export default InputField;
+export default AppInput;

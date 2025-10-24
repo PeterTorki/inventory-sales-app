@@ -4,6 +4,7 @@ import AppText from "./AppText";
 import { colors } from "../constants/colors";
 import { typography } from "../constants/fonts";
 import { sizes } from "../constants/sizes";
+import { TextStyle } from "react-native";
 
 interface AppButtonProps {
   title?: string;
@@ -12,8 +13,8 @@ interface AppButtonProps {
   loading?: boolean;
   variant?: "primary" | "secondary" | "outline" | "text";
   size?: "s" | "m" | "l";
-  color?: string; // override text color
-  backgroundColor?: string; // override bg color
+  color?: string;
+  backgroundColor?: string;
   radius?: keyof typeof sizes.radius;
   width?: DimensionValue;
   mt?: number;
@@ -26,6 +27,9 @@ interface AppButtonProps {
   gap?: number;
   style?: StyleProp<ViewStyle>;
   children?: React.ReactNode;
+  textStyle?: StyleProp<TextStyle>;
+  alignDirection?: "center" | "flex-start" | "flex-end";
+  textVariant?: keyof typeof typography;
 }
 
 const AppButton: React.FC<AppButtonProps> = ({
@@ -49,12 +53,12 @@ const AppButton: React.FC<AppButtonProps> = ({
   gap = 8,
   style,
   children,
+  textStyle,
+  alignDirection,
+  textVariant,
 }) => {
-  // 🔹 Determine typography and button height
-  const textStyle = size === "s" ? typography.buttonSmall : typography.button;
   const buttonHeight = sizes.button[size];
 
-  // 🔹 Variant-based color styles
   const variantStyles = {
     primary: {
       bg: backgroundColor ?? colors.primary,
@@ -91,7 +95,7 @@ const AppButton: React.FC<AppButtonProps> = ({
           borderRadius: sizes.radius[radius],
           width,
           height: buttonHeight,
-          justifyContent: "center",
+          justifyContent: alignDirection,
           alignItems: "center",
           flexDirection: "row",
           marginTop: mt,
@@ -110,15 +114,15 @@ const AppButton: React.FC<AppButtonProps> = ({
         <View
           style={{
             flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
             gap,
           }}>
           {icon}
           {children ? (
             children
           ) : title ? (
-            <AppText style={textStyle} color={variantStyles.text} center>
+            <AppText variant={textVariant} style={textStyle} color={variantStyles.text} center>
               {title}
             </AppText>
           ) : null}

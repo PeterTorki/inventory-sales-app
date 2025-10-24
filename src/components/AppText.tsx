@@ -7,14 +7,13 @@ type TypographyVariant = keyof typeof typography;
 
 interface AppTextProps {
   children: React.ReactNode;
-  variant?: TypographyVariant; // h1, body, caption, etc.
+  variant?: TypographyVariant;
   color?: string;
   center?: boolean;
   uppercase?: boolean;
   bold?: boolean;
   style?: StyleProp<TextStyle>;
 
-  // ✅ Add these optional props to handle overflow
   numberOfLines?: number;
   ellipsizeMode?: "head" | "middle" | "tail" | "clip";
   adjustsFontSizeToFit?: boolean;
@@ -34,7 +33,7 @@ const AppText: React.FC<AppTextProps> = ({
   adjustsFontSizeToFit = false,
   minimumFontScale = 0.8,
 }) => {
-  const baseTypography = typography[variant] ?? typography.body;
+  const baseTypography = (typography[variant] ?? typography.body) as TextStyle;
 
   const textStyle: TextStyle = {
     ...baseTypography,
