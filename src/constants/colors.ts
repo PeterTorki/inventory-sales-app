@@ -1,38 +1,48 @@
-import { useState } from "react";
+export const colors = {
+  // Primary brand colors
+  primary: "#d1e400", // Modern indigo
+  primaryLight: "#d1e400",
+  primaryDark: "#a3b300",
 
-export const lightTheme = {
-  primary: "#d1e400",
-  secondary: "#444901",
-  background: "#FFFFFF",
-  text: "#000000",
-  textSecondary: "#666666",
-  textPlaceholder: "#A0A0A0",
-  border: "#E0E0E0",
-  error: "#FF3B30",
-  warning: "#FF9500",
-  success: "#4CD964",
-  inputBackground: "#FFFFF",
-  inputBorder: "#DADADA",
-  gray: "#F5F5F5",
-};
-export const darkTheme = {
-  primary: "#96a300",
-  secondary: "#666d01",
-  background: "#000000",
-  text: "#FFFFFF",
-  textSecondary: "#999999",
-  textPlaceholder: "#666666",
-  border: "#333333",
-  error: "#FF453A",
-  warning: "#FF9F0A",
-  success: "#30D158",
-  inputBackground: "#1C1C1E",
-  inputBorder: "#3A3A3C",
-  gray: "#2C2C2E",
-};
+  // Secondary colors
+  secondary: "#64748B", // Slate
+  secondaryLight: "#94A3B8",
+  secondaryDark: "#475569",
 
-export const useColors = (isDarkMode: boolean) => {
-  const [colors, setColors] = useState(isDarkMode ? darkTheme : lightTheme);
+  // Neutral colors
+  background: "#FAFAFA",
+  surface: "#FFFFFF",
+  surfaceSecondary: "#F8FAFC",
+  white: "#FFFFFF",
 
-  return colors;
+  // Text colors
+  text: "#1A1A1A", // Slate 900
+  textSecondary: "#475569", // Slate 600
+  textTertiary: "#94A3B8", // Slate 400
+  textInverse: "#FFFFFF",
+
+  // Border and divider
+  border: "#E2E8F0", // Slate 200
+  borderLight: "#F1F5F9", // Slate 100
+  borderColor: "#E2E8F0",
+  divider: "#E2E8F0",
+
+  // Status colors
+  success: "#10B981", // Emerald 500
+  successLight: "#D1FAE5", // Emerald 100
+  error: "#EF4444", // Red 500
+  errorLight: "#FEE2E2", // Red 100
+  warning: "#F59E0B", // Amber 500
+  warningLight: "#FEF3C7", // Amber 100
+  info: "#3B82F6", // Blue 500
+  infoLight: "#DBEAFE", // Blue 100
+
+  // Interactive states
+  hover: "#F1F5F9",
+  pressed: "#E2E8F0",
+  focus: "#6366F1",
+
+  // Shadow
+  shadow: "rgba(0, 0, 0, 0.1)",
+  shadowDark: "rgba(0, 0, 0, 0.25)",
 };
