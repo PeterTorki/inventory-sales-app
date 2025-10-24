@@ -7,12 +7,9 @@ import { TransactionsStackParamList } from "./transactionsStackTypes";
 
 export type MainTabsParamList = {
   Home: undefined;
-  Items: NavigatorScreenParams<ItemsStackParamList>;
-  Customers: NavigatorScreenParams<CustomersStackParamList>;
-  Transactions: NavigatorScreenParams<TransactionsStackParamList>;
+  Items: undefined;
+  Customers: undefined;
+  Transactions: undefined;
 };
 
 export type HomeTabNavigationProp = BottomTabNavigationProp<MainTabsParamList, "Home">;
-export type ItemsTabNavigationProp = BottomTabNavigationProp<MainTabsParamList, "Items">;
-export type CustomersTabNavigationProp = BottomTabNavigationProp<MainTabsParamList, "Customers">;
-export type TransactionsTabNavigationProp = BottomTabNavigationProp<MainTabsParamList, "Transactions">;
