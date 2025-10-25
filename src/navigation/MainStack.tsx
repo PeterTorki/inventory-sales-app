@@ -5,8 +5,9 @@ import MainTabNavigator from "./MainTabs";
 import ItemsNavigator from "./ItemsStack";
 import CustomersNavigator from "./CustomersStack";
 import TransactionsNavigator from "./TransactionsStack";
-
-const MainStack = createNativeStackNavigator<MainStackParamList>();
+import { ItemsStackParamList } from "../types/navigation/itemsStackTypes";
+import { ItemFormScreen } from "../screens/items";
+const MainStack = createNativeStackNavigator<MainStackParamList & ItemsStackParamList>();
 
 const MainNavigator: React.FC = () => {
   return (
@@ -15,6 +16,15 @@ const MainNavigator: React.FC = () => {
       <MainStack.Screen name="ItemsStack" component={ItemsNavigator} />
       <MainStack.Screen name="CustomersStack" component={CustomersNavigator} />
       <MainStack.Screen name="TransactionsStack" component={TransactionsNavigator} />
+      {/* just to handle modal view */}
+      <MainStack.Group
+        screenOptions={{
+          presentation: "modal",
+          animation: "slide_from_bottom",
+        }}>
+        <MainStack.Screen name="AddItem" component={ItemFormScreen} />
+        <MainStack.Screen name="EditItem" component={ItemFormScreen} />
+      </MainStack.Group>
     </MainStack.Navigator>
   );
 };

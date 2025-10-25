@@ -8,10 +8,11 @@ import { StyleSheet, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { hs, ms } from "../utils/metrics";
 import { MainTabProps } from "../types/navigation/mainStackTypes";
-import ItemListScreen from "../screens/items/ItemListScreen";
+import ItemListScreen from "../screens/items/ItemListScreen/ItemListScreen";
 import CustomerListScreen from "../screens/customers/CustomerListScreen";
 import InvoiceDetailScreen from "../screens/transactions/InvoiceDetailScreen";
 import { withSafeArea } from "./withSafeArea";
+import CategoryScreen from "../screens/items/CategoryScreen/CategoryScreen";
 
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 
@@ -68,7 +69,11 @@ const MainTabNavigator: React.FC<MainTabProps> = () => {
           title: "Items",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "cube-outline"),
         }}
-        component={withSafeArea(ItemListScreen)}
+        component={withSafeArea(ItemListScreen, {
+          scrollable: false,
+          noPadding: true,
+          backgroundColor: colors.primary,
+        })}
       />
 
       <MainTabs.Screen

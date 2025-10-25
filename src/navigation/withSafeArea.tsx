@@ -15,7 +15,7 @@ export function withSafeArea(Component: React.ComponentType<any>, options?: With
     const Container = View;
     const horizontalPadding = options?.noPadding ? 0 : hs(20);
 
-    const sharedStyle = { flex: 1, backgroundColor: options?.backgroundColor || colors.background };
+    const sharedStyle = { flex: 1, backgroundColor: options?.backgroundColor || colors.background, zIndex: 0 };
 
     return (
       <SafeAreaView style={sharedStyle} edges={["top"]}>
