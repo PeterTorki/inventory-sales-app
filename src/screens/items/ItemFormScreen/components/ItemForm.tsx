@@ -1,0 +1,129 @@
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import AppText from "../../../../components/AppText";
+import AppInput from "../../../../components/AppInput";
+import AppButton from "../../../../components/AppButton";
+import ReusableDropdown from "../../../../components/ReusableDropdown";
+import { colors } from "../../../../constants/colors";
+import { sizes } from "../../../../constants/sizes";
+import { Category } from "../../../../types";
+
+interface ItemFormProps {
+  formData: {
+    name: string;
+    category_id: number | null;
+    price: string;
+    quantity: string;
+  };
+  errors: {
+    name: string;
+    category_id: string;
+    price: string;
+    quantity: string;
+  };
+  categories: Category[];
+  isLoading: boolean;
+  buttonTitle: string;
+  updateField: (field: string, value: any) => void;
+  onSubmit: () => void;
+  onCancel: () => void;
+}
+
+const ItemForm: React.FC<ItemFormProps> = ({
+  formData,
+  errors,
+  categories,
+  isLoading,
+  buttonTitle,
+  updateField,
+  onSubmit,
+  onCancel,
+}) => {
+  const categoryItems = categories.map((cat) => ({
+    label: cat.name,
+    value: cat.id,
+  }));
+
+  return (
+    <View style={styles.formCard}>
+      <AppText variant="h4" bold style={styles.sectionTitle}>
+        Item Information
+      </AppText>
+
+      <AppInput
+        label="Item Name"
+        value={formData.name}
+        onChangeText={(text) => updateField("name", text)}
+        placeholder="Enter item name"
+        error={errors.name}
+        required
+      />
+
+      <View style={{ marginBottom: sizes.spacing.md }}>
+        <ReusableDropdown
+          value={formData.category_id ? categories.find((cat) => cat.id === formData.category_id)?.name : ""}
+          data={categoryItems}
+          onChange={(item) => {
+            updateField("category_id", typeof item.value === "string" ? parseInt(item.value) : item.value);
+          }}
+          placeholder="Select category"
+        />
+        {errors.category_id ? (
+          <AppText variant="body" color={colors.error}>
+            {errors.category_id}
+          </AppText>
+        ) : null}
+      </View>
+
+      <AppInput
+        label="Price"
+        value={formData.price}
+        onChangeText={(text) => updateField("price", text)}
+        placeholder="0.00"
+        keyboardType="decimal-pad"
+        error={errors.price}
+        required
+      />
+
+      <AppInput
+        label="Quantity"
+        value={formData.quantity}
+        onChangeText={(text) => updateField("quantity", text)}
+        placeholder="0"
+        keyboardType="number-pad"
+        error={errors.quantity}
+        required
+      />
+
+      <View style={styles.buttonGroup}>
+        <AppButton title="Cancel" onPress={onCancel} variant="outline" width="48%" />
+        <AppButton title={buttonTitle} onPress={onSubmit} loading={isLoading} disabled={isLoading} width="48%" />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  formCard: {
+    backgroundColor: colors.surface,
+    borderRadius: sizes.radius["2xl"],
+    padding: sizes.spacing.xl,
+    marginTop: sizes.spacing.lg,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  sectionTitle: {
+    marginBottom: sizes.spacing.lg,
+  },
+  buttonGroup: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: sizes.spacing.md,
+    marginTop: sizes.spacing.xl,
+  },
+});
+
+export default ItemForm;
