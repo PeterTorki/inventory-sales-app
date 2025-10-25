@@ -1,14 +1,14 @@
 import React from "react";
-import AppInput from "../../../components/AppInput";
+import AppInput, { AppInputProps } from "../../../components/AppInput";
 
-interface EmailInputProps {
+interface EmailInputProps extends AppInputProps {
   value: string;
   onChangeText: (text: string) => void;
   onBlur: () => void;
   error: string;
 }
 
-const EmailInput: React.FC<EmailInputProps> = ({ value, onChangeText, onBlur, error }) => {
+const EmailInput: React.FC<EmailInputProps> = ({ value, onChangeText, onBlur, error, ...inputProps }) => {
   return (
     <AppInput
       label="Email"
@@ -20,7 +20,7 @@ const EmailInput: React.FC<EmailInputProps> = ({ value, onChangeText, onBlur, er
       autoCapitalize="none"
       autoCorrect={false}
       error={error}
-      required
+      {...inputProps}
     />
   );
 };

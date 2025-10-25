@@ -15,7 +15,7 @@ import { colors } from "../constants/colors";
 import { typography } from "../constants/fonts";
 import { sizes } from "../constants/sizes";
 
-interface AppInputProps extends Omit<TextInputProps, "style"> {
+export interface AppInputProps extends Omit<TextInputProps, "style"> {
   label?: string;
   error?: string;
   hint?: string;

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import AppInput from "../../../components/AppInput";
+import AppInput, { AppInputProps } from "../../../components/AppInput";
 import { colors } from "../../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 
-interface PasswordInputProps {
+interface PasswordInputProps extends AppInputProps {
   value: string;
   onChangeText: (text: string) => void;
   onBlur: () => void;
   error: string;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChangeText, onBlur, error }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChangeText, onBlur, error, ...inputProps }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (
@@ -33,6 +33,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChangeText, onBl
         )
       }
       onRightIconPress={() => setIsPasswordVisible(!isPasswordVisible)}
+      {...inputProps}
     />
   );
 };
