@@ -14,7 +14,7 @@ interface AppButtonProps {
   variant?: "primary" | "secondary" | "outline" | "text";
   size?: "s" | "m" | "l";
   color?: string;
-  backgroundColor?: string;
+  backgroundColor?: string | keyof typeof colors;
   radius?: keyof typeof sizes.radius;
   width?: DimensionValue;
   mt?: number;
@@ -40,7 +40,7 @@ const AppButton: React.FC<AppButtonProps> = ({
   variant = "primary",
   size = "m",
   color,
-  backgroundColor,
+  backgroundColor = "primary",
   radius = "md",
   width = "100%",
   mt = 0,
@@ -54,19 +54,21 @@ const AppButton: React.FC<AppButtonProps> = ({
   style,
   children,
   textStyle,
-  alignDirection,
+  alignDirection = "center",
   textVariant,
 }) => {
+  const lastBackgroundColor =
+    backgroundColor && backgroundColor in colors ? colors[backgroundColor as keyof typeof colors] : backgroundColor;
   const buttonHeight = sizes.button[size];
 
   const variantStyles = {
     primary: {
-      bg: backgroundColor ?? colors.primary,
+      bg: lastBackgroundColor ?? colors.primary,
       text: color ?? colors.textInverse,
       borderColor: "transparent",
     },
     secondary: {
-      bg: backgroundColor ?? colors.secondary,
+      bg: lastBackgroundColor ?? colors.secondary,
       text: color ?? colors.textInverse,
       borderColor: "transparent",
     },
@@ -114,8 +116,8 @@ const AppButton: React.FC<AppButtonProps> = ({
         <View
           style={{
             flexDirection: "row",
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
+            alignItems: "center",
+            justifyContent: "center",
             gap,
           }}>
           {icon}
