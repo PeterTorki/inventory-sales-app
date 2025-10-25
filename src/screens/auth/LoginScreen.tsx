@@ -11,7 +11,6 @@ import { validateEmail, validatePassword } from "./services";
 import { styles } from "./styles";
 import { useAuth } from "../../context/AuthContext";
 
-// Types
 interface FormField {
   value: string;
   error: string;
@@ -140,7 +139,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}>
-      <Header />
+      <Header title="Welcome Back" caption="Please login to your account" />
 
       <ScrollView
         style={styles.scrollContainer}

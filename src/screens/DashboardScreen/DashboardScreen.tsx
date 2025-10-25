@@ -14,7 +14,7 @@ const DashboardScreen: React.FC<DashboardScreenProps> = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "transparent" }}>
-      <Header hasBack={false} />
+      <Header title="Dashboard" caption="Overview of your activities" hasBack={false} />
       <ScrollView
         style={{
           flex: 1,
