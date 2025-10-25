@@ -5,13 +5,12 @@ import { RootStackParamList } from "../types/navigation/rootStackTypes";
 import AuthNavigator from "./AuthStack";
 import MainNavigator from "./MainStack";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "../context/AuthContext";
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigation: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
     return (

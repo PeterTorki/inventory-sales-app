@@ -3,6 +3,10 @@ import { colors } from "../../constants/colors";
 import { MainStackParamList } from "../../types/navigation/mainStackTypes";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { getItemCount, getCustomerCount, getInvoiceCount } from "../../database/queries";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
 
 export interface CardItem {
   title: string;
@@ -15,13 +19,30 @@ export interface CardItem {
 }
 
 export const useOverviewCards = (): CardItem[] => {
-  const navigation = useNavigation<MainStackParamList>();
+  const navigation = useNavigation<any>();
   const { width } = useWindowDimensions();
+
+  const [stats, setStats] = useState({
+    items: 0,
+    customers: 0,
+    invoices: 0,
+  });
+
+  useFocusEffect(
+    useCallback(() => {
+      // Fetch stats when screen comes into focus
+      const items = getItemCount();
+      const customers = getCustomerCount();
+      const invoices = getInvoiceCount();
+
+      setStats({ items, customers, invoices });
+    }, [])
+  );
 
   return [
     {
       title: "Items",
-      value: "150",
+      value: stats.items,
       iconName: "cube-outline",
       color: colors.text,
       backgroundColor: colors.infoLight,
@@ -30,7 +51,7 @@ export const useOverviewCards = (): CardItem[] => {
     },
     {
       title: "Customers",
-      value: "7",
+      value: stats.customers,
       iconName: "people-outline",
       color: colors.text,
       backgroundColor: colors.successLight,
@@ -39,7 +60,7 @@ export const useOverviewCards = (): CardItem[] => {
     },
     {
       title: "Invoices",
-      value: "50",
+      value: stats.invoices,
       iconName: "receipt-outline",
       color: colors.text,
       backgroundColor: colors.warningLight,
