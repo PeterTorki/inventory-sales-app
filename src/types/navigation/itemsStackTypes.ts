@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type ItemsStackParamList = {
+  navigate(arg0: string, arg1?: { screen: string | number }, arg2?: { [key: string]: any }): void;
   ItemList: undefined;
   AddItem: undefined;
   EditItem: { itemId: number };

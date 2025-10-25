@@ -7,7 +7,7 @@ import { CustomersStackParamList } from "./customersStackTypes";
 import { TransactionsStackParamList } from "./transactionsStackTypes";
 
 export type MainStackParamList = {
-  navigate(arg0: string, arg1?: { screen: string }): void;
+  navigate(arg0: string, arg1?: { screen: string | number }): void;
   MainTabs: NavigatorScreenParams<MainTabsParamList>;
   ItemsStack: {
     screen?: keyof ItemsStackParamList;
