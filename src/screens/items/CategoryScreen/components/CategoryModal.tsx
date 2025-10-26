@@ -1,12 +1,11 @@
-// CategoryModal.tsx
 import React from "react";
-import { View, StyleSheet, Keyboard } from "react-native";
+import { View, Keyboard } from "react-native";
 import AppModal from "../../../../components/AppModal";
 import AppInput from "../../../../components/AppInput";
 import AppButton from "../../../../components/AppButton";
-import { sizes } from "../../../../constants/sizes";
 import { Category } from "../../../../types";
 import { handleSaveCategory } from "../services";
+import { categoryModalStyles as styles } from "./styles";
 
 interface CategoryModalProps {
   visible: boolean;
@@ -91,14 +90,5 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
     </AppModal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalButtons: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: sizes.spacing.md,
-    marginTop: sizes.spacing.md,
-  },
-});
 
 export default CategoryModal;

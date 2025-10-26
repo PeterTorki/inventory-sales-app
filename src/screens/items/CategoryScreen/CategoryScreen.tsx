@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { View, FlatList } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../../components/Header";
 import AppText from "../../../components/AppText";
@@ -12,6 +12,7 @@ import { loadCategories, handleAddCategory, handleEditCategory, handleDeleteCate
 import CategoryItem from "./components/CategoryItem";
 import CategoryModal from "./components/CategoryModal";
 import EmptyState from "./components/EmptyState";
+import { styles } from "./styles";
 
 const CategoryScreen: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -89,24 +90,5 @@ const CategoryScreen: React.FC = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  content: {
-    flex: 1,
-    paddingHorizontal: sizes.layout.containerPadding,
-    borderTopRightRadius: sizes.radius["3xl"],
-    borderTopLeftRadius: sizes.radius["3xl"],
-    backgroundColor: colors.surface,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginVertical: sizes.spacing.lg,
-  },
-  listContainer: { paddingBottom: sizes.spacing["2xl"] },
-  emptyContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
-});
 
 export default CategoryScreen;

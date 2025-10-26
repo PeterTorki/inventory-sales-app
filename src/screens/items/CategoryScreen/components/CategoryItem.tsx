@@ -1,10 +1,10 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AppText from "../../../../components/AppText";
 import { colors } from "../../../../constants/colors";
-import { sizes } from "../../../../constants/sizes";
 import { Category } from "../../../../types";
+import { categoryItemStyles as styles } from "./styles";
 
 interface CategoryItemProps {
   item: Category;
@@ -31,28 +31,5 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ item, onEdit, onDelete }) =
     </View>
   </View>
 );
-
-const styles = StyleSheet.create({
-  categoryItem: {
-    backgroundColor: colors.divider,
-    borderRadius: sizes.radius.lg,
-    padding: sizes.spacing.lg,
-    marginBottom: sizes.spacing.md,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  categoryInfo: { flex: 1 },
-  actionButtons: {
-    flexDirection: "row",
-    gap: sizes.spacing.md,
-  },
-  iconButton: { padding: sizes.spacing.sm },
-});
 
 export default CategoryItem;

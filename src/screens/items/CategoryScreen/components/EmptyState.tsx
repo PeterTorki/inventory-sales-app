@@ -1,9 +1,9 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AppText from "../../../../components/AppText";
 import { colors } from "../../../../constants/colors";
-import { sizes } from "../../../../constants/sizes";
+import { emptyStateStyles as styles } from "./styles";
 
 const EmptyState: React.FC = () => (
   <View style={styles.emptyState}>
@@ -16,18 +16,5 @@ const EmptyState: React.FC = () => (
     </AppText>
   </View>
 );
-
-const styles = StyleSheet.create({
-  emptyState: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: sizes.spacing["4xl"],
-  },
-  emptyText: { marginTop: sizes.spacing.lg },
-  emptySubtext: {
-    marginTop: sizes.spacing.sm,
-    paddingHorizontal: sizes.spacing["2xl"],
-  },
-});
 
 export default EmptyState;
