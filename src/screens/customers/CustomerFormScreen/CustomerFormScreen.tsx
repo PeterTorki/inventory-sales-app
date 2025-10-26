@@ -91,7 +91,7 @@ const CustomerFormScreen: React.FC<CustomerFormScreenProps> = ({ navigation, rou
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.primary,
   },
   scrollContainer: {
     flex: 1,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     paddingHorizontal: sizes.layout.containerPadding,
-    paddingBottom: sizes.spacing["2xl"],
+    paddingBottom: sizes.spacing["6xl"],
   },
   loadingContainer: {
     flex: 1,

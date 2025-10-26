@@ -3,10 +3,12 @@ import { colors } from "../../../constants/colors";
 import { sizes } from "../../../constants/sizes";
 
 export const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: colors.primary },
   content: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.surface,
+    borderTopRightRadius: sizes.radius["3xl"],
+    borderTopLeftRadius: sizes.radius["3xl"],
     paddingHorizontal: sizes.layout.containerPadding,
   },
   header: {
@@ -16,7 +18,7 @@ export const styles = StyleSheet.create({
     marginTop: sizes.spacing.sm,
   },
   listContainer: {
-    paddingBottom: sizes.spacing["2xl"],
+    paddingBottom: sizes.spacing["6xl"],
   },
   emptyContainer: {
     flex: 1,

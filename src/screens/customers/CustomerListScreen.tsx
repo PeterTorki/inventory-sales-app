@@ -36,9 +36,11 @@ const CustomerListScreen: React.FC = () => {
     handleDeleteCustomer(customer, handleLoadCustomers);
   };
 
+  const isFromTab = navigation.canGoBack();
+
   return (
     <View style={styles.container}>
-      <Header title="Customers" caption="Manage your customer database" hasBack={false} />
+      <Header title="Customers" caption="Manage your customer database" hasBack={isFromTab} />
 
       <View style={styles.content}>
         <CustomerHeader
