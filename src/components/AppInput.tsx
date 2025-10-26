@@ -157,7 +157,6 @@ const AppInput: React.FC<AppInputProps> = ({
             {
               flex: 1,
               ...typography.body,
-              lineHeight: 0,
               height: "auto",
               color: textColor ?? colors.text,
               padding: 0,

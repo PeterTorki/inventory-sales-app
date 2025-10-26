@@ -96,7 +96,6 @@ const AppButton: React.FC<AppButtonProps> = ({
           borderColor: variantStyles.borderColor,
           borderRadius: sizes.radius[radius],
           width,
-          height: buttonHeight,
           justifyContent: alignDirection,
           alignItems: "center",
           flexDirection: "row",

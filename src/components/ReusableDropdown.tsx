@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   findNodeHandle,
   UIManager,
+  Platform,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../constants/colors";
@@ -16,7 +17,7 @@ import AppText from "./AppText";
 
 interface OptionItem {
   label: string;
-  value: number;
+  value: number; 
 }
 
 interface ReusableDropdownProps {
@@ -46,7 +47,7 @@ const ReusableDropdown = ({
     if (!expanded) {
       if (buttonRef.current) {
         buttonRef.current.measureInWindow((x, y, width, height) => {
-          setDropdownTop(y + height + 56);
+          setDropdownTop(y + height + (Platform.OS === "android" ? 0 : 20));
           setExpanded(true);
         });
       }
