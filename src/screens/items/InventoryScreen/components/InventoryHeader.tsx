@@ -1,11 +1,10 @@
-// InventoryHeader.tsx
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AppInput from "../../../../components/AppInput";
 import AppText from "../../../../components/AppText";
 import { colors } from "../../../../constants/colors";
-import { sizes } from "../../../../constants/sizes";
+import { inventoryHeaderStyles as styles } from "./styles";
 
 interface InventoryHeaderProps {
   query: string;
@@ -71,30 +70,4 @@ const InventoryHeader: React.FC<InventoryHeaderProps> = ({
   </View>
 );
 
-const styles = StyleSheet.create({
-  listHeader: { marginVertical: sizes.spacing.lg },
-  statsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: sizes.spacing.sm,
-    marginTop: sizes.spacing.md,
-  },
-  statCard: {
-    flex: 1,
-    padding: sizes.spacing.md,
-    borderRadius: sizes.radius.lg,
-    alignItems: "center",
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: colors.text,
-    padding: 0,
-  },
-});
-
 export default InventoryHeader;
-
-// ================================================
-
-// ItemCard.tsx

@@ -1,13 +1,13 @@
 import React from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import AppModal from "../../../../components/AppModal";
 import AppInput from "../../../../components/AppInput";
 import AppButton from "../../../../components/AppButton";
 import AppText from "../../../../components/AppText";
 import { colors } from "../../../../constants/colors";
-import { sizes } from "../../../../constants/sizes";
 import { Item } from "../../../../types";
 import { updateItem } from "../../../../database/queries";
+import { adjustModalStyles as styles } from "./styles";
 
 interface AdjustModalProps {
   visible: boolean;
@@ -97,24 +97,5 @@ const AdjustModal: React.FC<AdjustModalProps> = ({
     </AppModal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalSubtitle: { marginBottom: sizes.spacing.md },
-  currentStockInfo: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: colors.background,
-    padding: sizes.spacing.md,
-    borderRadius: sizes.radius.md,
-    marginBottom: sizes.spacing.lg,
-  },
-  modalButtons: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: sizes.spacing.md,
-    marginTop: sizes.spacing.md,
-  },
-});
 
 export default AdjustModal;

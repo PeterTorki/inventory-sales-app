@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from "react";
-import { View, FlatList, StyleSheet, Alert } from "react-native";
+import { View, FlatList } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../../components/Header";
-import { colors } from "../../../constants/colors";
-import { sizes } from "../../../constants/sizes";
 import { Item } from "../../../types";
 import { useSearch } from "../../../hooks/useSearch";
-import { getAllItems } from "../../../database/queries";
+import { loadItems, calculateInventoryStats } from "./services";
+import { styles } from "./styles";
 import InventoryHeader from "./components/InventoryHeader";
 import ItemCard from "./components/ItemCard";
 import AdjustModal from "./components/AdjustModal";
@@ -24,21 +23,12 @@ const InventoryScreen: React.FC = () => {
 
   useFocusEffect(
     useCallback(() => {
-      loadItems();
+      loadItems(setItems, setIsLoading);
     }, [])
   );
 
-  const loadItems = () => {
-    try {
-      setIsLoading(true);
-      const data = getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.error("Error loading inventory:", error);
-      Alert.alert("Error", "Failed to load inventory");
-    } finally {
-      setIsLoading(false);
-    }
+  const handleLoadItems = () => {
+    loadItems(setItems, setIsLoading);
   };
 
   const handleQuickAdjust = (item: Item) => {
@@ -48,9 +38,7 @@ const InventoryScreen: React.FC = () => {
     setIsAdjustModalVisible(true);
   };
 
-  const totalItems = filteredData.length;
-  const outOfStock = filteredData.filter((i) => i.quantity === 0).length;
-  const lowStock = filteredData.filter((i) => i.quantity > 0 && i.quantity < 10).length;
+  const { totalItems, outOfStock, lowStock } = calculateInventoryStats(filteredData);
 
   return (
     <View style={styles.container}>
@@ -73,7 +61,7 @@ const InventoryScreen: React.FC = () => {
           ListEmptyComponent={!isLoading ? EmptyState : null}
           contentContainerStyle={filteredData.length === 0 && !isLoading ? styles.emptyContainer : styles.listContainer}
           refreshing={isLoading}
-          onRefresh={loadItems}
+          onRefresh={handleLoadItems}
           showsVerticalScrollIndicator={false}
         />
       </View>
@@ -86,21 +74,10 @@ const InventoryScreen: React.FC = () => {
         setAdjustQuantity={setAdjustQuantity}
         setAdjustError={setAdjustError}
         setIsModalVisible={setIsAdjustModalVisible}
-        onSuccess={loadItems}
+        onSuccess={handleLoadItems}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  containerContent: {
-    flex: 1,
-    backgroundColor: colors.background,
-    paddingHorizontal: sizes.layout.containerPadding,
-  },
-  listContainer: { paddingBottom: sizes.spacing["2xl"] },
-  emptyContainer: { flex: 1 },
-});
 
 export default InventoryScreen;
