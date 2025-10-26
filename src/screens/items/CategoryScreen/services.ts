@@ -1,6 +1,9 @@
 import { Alert, Keyboard } from "react-native";
 import { getAllCategories, addCategory, updateCategory, deleteCategory } from "../../../database/queries";
 import { Category } from "../../../types";
+import { createLoadDataService, createDeleteService } from "../../../utils/dataServices";
+
+const loadDataService = createLoadDataService<Category>(getAllCategories, "Failed to load categories");
 
 export const loadCategories = (setCategories: (categories: Category[]) => void) => {
   try {
@@ -78,26 +81,8 @@ export const handleSaveCategory = async (
   }
 };
 
+const deleteService = createDeleteService<Category>(deleteCategory, "Category", "Failed to delete category");
+
 export const handleDeleteCategory = (category: Category, onSuccess: () => void) => {
-  Alert.alert(
-    "Delete Category",
-    `Are you sure you want to delete "${category.name}"? This will remove the category from all items.`,
-    [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Delete",
-        style: "destructive",
-        onPress: async () => {
-          try {
-            deleteCategory(category.id);
-            Alert.alert("Success", "Category deleted successfully");
-            onSuccess();
-          } catch (error) {
-            console.error("Error deleting category:", error);
-            Alert.alert("Error", "Failed to delete category");
-          }
-        },
-      },
-    ]
-  );
+  deleteService(category, onSuccess);
 };

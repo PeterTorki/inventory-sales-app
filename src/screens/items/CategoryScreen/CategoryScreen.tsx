@@ -4,6 +4,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../../components/Header";
 import AppText from "../../../components/AppText";
 import AppButton from "../../../components/AppButton";
+import EmptyState from "../../../components/EmptyState";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../../constants/colors";
 import { sizes } from "../../../constants/sizes";
@@ -11,7 +12,6 @@ import { Category } from "../../../types";
 import { loadCategories, handleAddCategory, handleEditCategory, handleDeleteCategory } from "./services";
 import CategoryItem from "./components/CategoryItem";
 import CategoryModal from "./components/CategoryModal";
-import EmptyState from "./components/EmptyState";
 import { styles } from "./styles";
 
 const CategoryScreen: React.FC = () => {
@@ -68,7 +68,13 @@ const CategoryScreen: React.FC = () => {
             renderItem={({ item }) => <CategoryItem item={item} onEdit={onEditCategory} onDelete={onDeleteCategory} />}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={categories.length === 0 ? styles.emptyContainer : styles.listContainer}
-            ListEmptyComponent={EmptyState}
+            ListEmptyComponent={
+              <EmptyState
+                iconName="pricetags-outline"
+                title="No categories yet"
+                subtitle="Add your first category to organize items"
+              />
+            }
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
           />
