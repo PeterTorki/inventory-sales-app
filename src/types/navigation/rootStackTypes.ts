@@ -2,6 +2,7 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 import { AuthStackParamList } from "./authStackTypes";
 import { MainStackParamList } from "./mainStackTypes";
 
+
 export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   MainStack: NavigatorScreenParams<MainStackParamList>;
