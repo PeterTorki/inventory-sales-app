@@ -7,7 +7,12 @@ import CustomersNavigator from "./CustomersStack";
 import TransactionsNavigator from "./TransactionsStack";
 import { ItemsStackParamList } from "../types/navigation/itemsStackTypes";
 import { ItemFormScreen } from "../screens/items";
-const MainStack = createNativeStackNavigator<MainStackParamList & ItemsStackParamList>();
+import { TransactionsStackParamList } from "../types/navigation/transactionsStackTypes";
+import { CustomersStackParamList } from "../types/navigation/customersStackTypes";
+import CustomerFormScreen from "../screens/customers/CustomerFormScreen/CustomerFormScreen";
+const MainStack = createNativeStackNavigator<
+  MainStackParamList & ItemsStackParamList & CustomersStackParamList & TransactionsStackParamList
+>();
 
 const MainNavigator: React.FC = () => {
   return (
@@ -24,6 +29,8 @@ const MainNavigator: React.FC = () => {
         }}>
         <MainStack.Screen name="AddItem" component={ItemFormScreen} />
         <MainStack.Screen name="EditItem" component={ItemFormScreen} />
+        <MainStack.Screen name="AddCustomer" component={CustomerFormScreen} />
+        <MainStack.Screen name="EditCustomer" component={CustomerFormScreen} />
       </MainStack.Group>
     </MainStack.Navigator>
   );
