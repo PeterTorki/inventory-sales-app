@@ -82,7 +82,11 @@ const MainTabNavigator: React.FC<MainTabProps> = () => {
           title: "Customers",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "people-outline"),
         }}
-        component={withSafeArea(CustomerListScreen)}
+        component={withSafeArea(CustomerListScreen, {
+          scrollable: false,
+          noPadding: true,
+          backgroundColor: colors.primary,
+        })}
       />
 
       <MainTabs.Screen
@@ -91,7 +95,11 @@ const MainTabNavigator: React.FC<MainTabProps> = () => {
           title: "Transactions",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "receipt-outline"),
         }}
-        component={withSafeArea(InvoiceDetailScreen)}
+        component={withSafeArea(InvoiceDetailScreen, {
+          scrollable: false,
+          noPadding: true,
+          backgroundColor: colors.primary,
+        })}
       />
     </MainTabs.Navigator>
   );
