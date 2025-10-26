@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from "react";
-import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator } from "react-native";
+import { View, ScrollView, KeyboardAvoidingView, Platform, ActivityIndicator } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../../components/Header";
 import AppText from "../../../components/AppText";
 import { colors } from "../../../constants/colors";
-import { sizes } from "../../../constants/sizes";
 import { AddItemScreenProps, EditItemScreenProps } from "../../../types/navigation/itemsStackTypes";
 import { Category } from "../../../types";
 import { loadFormData, validateForm, submitForm } from "./services";
+import { styles } from "./styles";
 import ItemForm from "./components/ItemForm";
 
 type ItemFormScreenProps = AddItemScreenProps | EditItemScreenProps;
@@ -93,31 +93,5 @@ const ItemFormScreen: React.FC<ItemFormScreenProps> = ({ navigation, route }) =>
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollContainer: {
-    flex: 1,
-    backgroundColor: colors.surface,
-    borderTopRightRadius: sizes.radius["3xl"],
-    borderTopLeftRadius: sizes.radius["3xl"],
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingHorizontal: sizes.layout.containerPadding,
-    paddingBottom: sizes.spacing["2xl"],
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  loadingText: {
-    marginTop: sizes.spacing.md,
-  },
-});
 
 export default ItemFormScreen;

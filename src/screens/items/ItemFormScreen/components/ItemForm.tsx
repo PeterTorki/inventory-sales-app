@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import AppText from "../../../../components/AppText";
 import AppInput from "../../../../components/AppInput";
 import AppButton from "../../../../components/AppButton";
@@ -7,6 +7,7 @@ import ReusableDropdown from "../../../../components/ReusableDropdown";
 import { colors } from "../../../../constants/colors";
 import { sizes } from "../../../../constants/sizes";
 import { Category } from "../../../../types";
+import { itemFormStyles as styles } from "./styles";
 
 interface ItemFormProps {
   formData: {
@@ -102,28 +103,5 @@ const ItemForm: React.FC<ItemFormProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  formCard: {
-    backgroundColor: colors.surface,
-    borderRadius: sizes.radius["2xl"],
-    padding: sizes.spacing.xl,
-    marginTop: sizes.spacing.lg,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  sectionTitle: {
-    marginBottom: sizes.spacing.lg,
-  },
-  buttonGroup: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: sizes.spacing.md,
-    marginTop: sizes.spacing.xl,
-  },
-});
 
 export default ItemForm;
