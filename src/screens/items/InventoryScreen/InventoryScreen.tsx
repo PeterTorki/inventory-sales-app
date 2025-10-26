@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View, FlatList } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../../components/Header";
+import EmptyState from "../../../components/EmptyState";
 import { Item } from "../../../types";
 import { useSearch } from "../../../hooks/useSearch";
 import { loadItems, calculateInventoryStats } from "./services";
@@ -9,7 +10,6 @@ import { styles } from "./styles";
 import InventoryHeader from "./components/InventoryHeader";
 import ItemCard from "./components/ItemCard";
 import AdjustModal from "./components/AdjustModal";
-import EmptyState from "./components/EmptyState";
 
 const InventoryScreen: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -58,7 +58,15 @@ const InventoryScreen: React.FC = () => {
           data={filteredData}
           renderItem={({ item }) => <ItemCard item={item} onAdjust={handleQuickAdjust} />}
           keyExtractor={(item) => item.id.toString()}
-          ListEmptyComponent={!isLoading ? EmptyState : null}
+          ListEmptyComponent={
+            !isLoading ? (
+              <EmptyState
+                iconName="cube-outline"
+                title="No inventory items"
+                subtitle="Add items to track stock levels"
+              />
+            ) : null
+          }
           contentContainerStyle={filteredData.length === 0 && !isLoading ? styles.emptyContainer : styles.listContainer}
           refreshing={isLoading}
           onRefresh={handleLoadItems}

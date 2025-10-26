@@ -1,18 +1,11 @@
-import { Alert } from "react-native";
 import { getAllItems } from "../../../database/queries";
 import { Item } from "../../../types";
+import { createLoadDataService } from "../../../utils/dataServices";
+
+const loadDataService = createLoadDataService<Item>(getAllItems, "Failed to load inventory");
 
 export const loadItems = (setItems: (items: Item[]) => void, setIsLoading: (loading: boolean) => void) => {
-  try {
-    setIsLoading(true);
-    const data = getAllItems();
-    setItems(data);
-  } catch (error) {
-    console.error("Error loading inventory:", error);
-    Alert.alert("Error", "Failed to load inventory");
-  } finally {
-    setIsLoading(false);
-  }
+  loadDataService(setItems, setIsLoading);
 };
 
 export const calculateInventoryStats = (items: Item[]) => {
