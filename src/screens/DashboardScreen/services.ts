@@ -83,7 +83,7 @@ export const useQuickActionCards = (): CardItem[] => {
       color: colors.text,
       backgroundColor: colors.primaryLight,
       width: width < 400 ? "100%" : "48%",
-      onPress: () => navigation.navigate("ItemsStack", { screen: "AddItem" }),
+      onPress: () => navigation.navigate("AddItem"),
     },
     {
       title: "Add Customer",
@@ -92,7 +92,7 @@ export const useQuickActionCards = (): CardItem[] => {
       color: colors.text,
       backgroundColor: colors.successLight,
       width: width < 400 ? "100%" : "48%",
-      onPress: () => navigation.navigate("CustomersStack", { screen: "AddCustomer" }),
+      onPress: () => navigation.navigate("AddCustomer"),
     },
     {
       title: "Create Invoice",
