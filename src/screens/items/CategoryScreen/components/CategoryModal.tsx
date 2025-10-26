@@ -18,6 +18,7 @@ interface CategoryModalProps {
   setIsModalVisible: (visible: boolean) => void;
   setIsLoading: (loading: boolean) => void;
   onSuccess: () => void;
+  afterCloseHandler: () => void;
 }
 
 const CategoryModal: React.FC<CategoryModalProps> = ({
@@ -31,6 +32,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   setIsModalVisible,
   setIsLoading,
   onSuccess,
+  afterCloseHandler,
 }) => {
   const onSave = () => {
     handleSaveCategory(
@@ -42,6 +44,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
       setCategoryName,
       onSuccess
     );
+    afterCloseHandler();
   };
 
   return (
@@ -74,6 +77,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
           onPress={() => {
             Keyboard.dismiss();
             setIsModalVisible(false);
+            afterCloseHandler();
           }}
           variant="outline"
           width="48%"

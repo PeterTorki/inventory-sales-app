@@ -13,10 +13,13 @@ import { loadCategories, handleAddCategory, handleEditCategory, handleDeleteCate
 import CategoryItem from "./components/CategoryItem";
 import CategoryModal from "./components/CategoryModal";
 import { styles } from "./styles";
+import { CategoryScreenProps } from "../../../types/navigation/itemsStackTypes";
 
-const CategoryScreen: React.FC = () => {
+const CategoryScreen: React.FC<CategoryScreenProps> = ({ navigation, route }: CategoryScreenProps) => {
+  const { isAddCategory } = route.params;
+
   const [categories, setCategories] = useState<Category[]>([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(isAddCategory || false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [categoryName, setCategoryName] = useState("");
   const [error, setError] = useState("");
@@ -92,6 +95,12 @@ const CategoryScreen: React.FC = () => {
         setIsModalVisible={setIsModalVisible}
         setIsLoading={setIsLoading}
         onSuccess={() => loadCategories(setCategories)}
+        afterCloseHandler={() => {
+          if (isAddCategory) {
+            navigation.setParams({ isAddCategory: false });
+            navigation.goBack();
+          }
+        }}
       />
     </>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import AppText from "../../../../components/AppText";
 import AppInput from "../../../../components/AppInput";
 import AppButton from "../../../../components/AppButton";
@@ -7,7 +7,8 @@ import ReusableDropdown from "../../../../components/ReusableDropdown";
 import { colors } from "../../../../constants/colors";
 import { sizes } from "../../../../constants/sizes";
 import { Category } from "../../../../types";
-import { itemFormStyles as styles } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 interface ItemFormProps {
   formData: {
@@ -45,6 +46,8 @@ const ItemForm: React.FC<ItemFormProps> = ({
     value: cat.id,
   }));
 
+  const navigation = useNavigation();
+
   return (
     <View style={styles.formCard}>
       <AppText variant="h4" bold style={styles.sectionTitle}>
@@ -61,14 +64,39 @@ const ItemForm: React.FC<ItemFormProps> = ({
       />
 
       <View style={{ marginBottom: sizes.spacing.md }}>
-        <ReusableDropdown
-          value={formData.category_id ? categories.find((cat) => cat.id === formData.category_id)?.name : ""}
-          data={categoryItems}
-          onChange={(item) => {
-            updateField("category_id", typeof item.value === "string" ? parseInt(item.value) : item.value);
-          }}
-          placeholder="Select category"
-        />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: sizes.spacing.sm,
+          }}>
+          <ReusableDropdown
+            value={formData.category_id ? categories.find((cat) => cat.id === formData.category_id)?.name : ""}
+            data={categoryItems}
+            onChange={(item) => {
+              updateField("category_id", typeof item.value === "string" ? parseInt(item.value) : item.value);
+            }}
+            placeholder="Select category"
+          />
+          <AppButton
+            icon={<Ionicons name="add-circle-outline" size={20} color={colors.text} />}
+            // onPress={() => {
+            //   navigation.navigate(
+            //     "ItemsStack",
+            //     { screen: "Category" },
+            //     {
+            //       isAddCategory: true,
+            //     }
+            //   );
+            // }}
+            onPress={() => navigation.navigate("ItemsStack", { screen: "Category", params: { isAddCategory: true } })}
+            size="s"
+            width="auto"
+            variant="primary"
+            pv={sizes.icon.xs}
+          />
+        </View>
         {errors.category_id ? (
           <AppText variant="body" color={colors.error}>
             {errors.category_id}
@@ -103,5 +131,28 @@ const ItemForm: React.FC<ItemFormProps> = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  formCard: {
+    backgroundColor: colors.surface,
+    borderRadius: sizes.radius["2xl"],
+    padding: sizes.spacing.xl,
+    marginTop: sizes.spacing.lg,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  sectionTitle: {
+    marginBottom: sizes.spacing.lg,
+  },
+  buttonGroup: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: sizes.spacing.md,
+    marginTop: sizes.spacing.xl,
+  },
+});
 
 export default ItemForm;

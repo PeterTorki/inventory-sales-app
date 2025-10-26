@@ -14,10 +14,11 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../constants/colors";
 import AppText from "./AppText";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface OptionItem {
   label: string;
-  value: number; 
+  value: number;
 }
 
 interface ReusableDropdownProps {
@@ -38,6 +39,7 @@ const ReusableDropdown = ({
   const [expanded, setExpanded] = useState(false);
   const [internalValue, setInternalValue] = useState("");
   const [dropdownTop, setDropdownTop] = useState(0);
+  const insets = useSafeAreaInsets();
 
   const buttonRef = useRef<View>(null);
   const value = propValue ?? internalValue;
@@ -47,7 +49,7 @@ const ReusableDropdown = ({
     if (!expanded) {
       if (buttonRef.current) {
         buttonRef.current.measureInWindow((x, y, width, height) => {
-          setDropdownTop(y + height + (Platform.OS === "android" ? 0 : 20));
+          setDropdownTop(y + height + insets.top + 10);
           setExpanded(true);
         });
       }
@@ -66,7 +68,7 @@ const ReusableDropdown = ({
   );
 
   return (
-    <View ref={buttonRef}>
+    <View style={{ flex: 1 }} ref={buttonRef}>
       <TouchableOpacity
         style={[styles.button, disabled && styles.disabledButton]}
         activeOpacity={0.8}

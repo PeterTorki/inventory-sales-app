@@ -5,9 +5,10 @@ export type ItemsStackParamList = {
   ItemList: undefined;
   AddItem: undefined;
   EditItem: { itemId: number };
-  Category: undefined;
+  Category: { isAddCategory?: boolean };
   Inventory: undefined;
 };
+//   const { isAddCategory } = route.params;
 
 export type ItemListScreenProps = NativeStackScreenProps<ItemsStackParamList, "ItemList">;
 export type AddItemScreenProps = NativeStackScreenProps<ItemsStackParamList, "AddItem">;
