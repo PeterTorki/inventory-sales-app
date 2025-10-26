@@ -1,10 +1,10 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AppText from "../../../../components/AppText";
 import { colors } from "../../../../constants/colors";
-import { sizes } from "../../../../constants/sizes";
 import { Item } from "../../../../types";
+import { itemCardStyles as styles } from "./styles";
 
 interface ItemCardProps {
   item: Item;
@@ -55,61 +55,5 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onEdit, onDelete }) => (
     </View>
   </View>
 );
-
-const styles = StyleSheet.create({
-  itemCard: {
-    backgroundColor: colors.surface,
-    borderRadius: sizes.radius.lg,
-    padding: sizes.spacing.lg,
-    marginBottom: sizes.spacing.md,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  itemHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: sizes.spacing.md,
-  },
-  itemInfo: {
-    flex: 1,
-    marginRight: sizes.spacing.md,
-  },
-  categoryBadge: {
-    backgroundColor: colors.primaryLight + "30",
-    paddingHorizontal: sizes.spacing.sm,
-    paddingVertical: 4,
-    borderRadius: sizes.radius.sm,
-    marginTop: sizes.spacing.xs,
-    alignSelf: "flex-start",
-  },
-  actionButtons: {
-    flexDirection: "row",
-    gap: sizes.spacing.sm,
-  },
-  iconButton: {
-    padding: sizes.spacing.xs,
-  },
-  itemDetails: {
-    gap: sizes.spacing.sm,
-  },
-  detailRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: sizes.spacing.md,
-  },
-  detailItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: sizes.spacing.xs,
-    flex: 1,
-  },
-  detailText: {
-    fontSize: 14,
-  },
-});
 
 export default ItemCard;

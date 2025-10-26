@@ -1,13 +1,12 @@
 import React, { useState, useCallback } from "react";
-import { View, FlatList, StyleSheet, Alert } from "react-native";
+import { View, FlatList } from "react-native";
 import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import Header from "../../../components/Header";
-import { colors } from "../../../constants/colors";
-import { sizes } from "../../../constants/sizes";
-import { getAllItems, deleteItem } from "../../../database/queries";
 import { Item } from "../../../types";
 import { ItemsStackParamList } from "../../../types/navigation/itemsStackTypes";
 import { useSearch } from "../../../hooks/useSearch";
+import { loadItems, handleDeleteItem } from "./services";
+import { styles } from "./styles";
 import ItemHeader from "./components/ItemHeader";
 import ItemCard from "./components/ItemCard";
 import EmptyState from "./components/EmptyState";
@@ -21,21 +20,12 @@ const ItemListScreen: React.FC = () => {
 
   useFocusEffect(
     useCallback(() => {
-      loadItems();
+      loadItems(setItems, setIsLoading);
     }, [])
   );
 
-  const loadItems = () => {
-    try {
-      setIsLoading(true);
-      const data = getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.error("Error loading items:", error);
-      Alert.alert("Error", "Failed to load items");
-    } finally {
-      setIsLoading(false);
-    }
+  const handleLoadItems = () => {
+    loadItems(setItems, setIsLoading);
   };
 
   const handleEdit = (itemId: number) => {
@@ -43,23 +33,7 @@ const ItemListScreen: React.FC = () => {
   };
 
   const handleDelete = (item: Item) => {
-    Alert.alert("Delete Item", `Are you sure you want to delete "${item.name}"?`, [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Delete",
-        style: "destructive",
-        onPress: () => {
-          try {
-            deleteItem(item.id);
-            Alert.alert("Success", "Item deleted successfully");
-            loadItems();
-          } catch (error) {
-            console.error("Error deleting item:", error);
-            Alert.alert("Error", "Failed to delete item. It may be used in invoices.");
-          }
-        },
-      },
-    ]);
+    handleDeleteItem(item, handleLoadItems);
   };
 
   return (
@@ -87,29 +61,12 @@ const ItemListScreen: React.FC = () => {
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
             refreshing={isLoading}
-            onRefresh={loadItems}
+            onRefresh={handleLoadItems}
           />
         </View>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  containerContent: {
-    flex: 1,
-    backgroundColor: colors.background,
-    paddingHorizontal: sizes.layout.containerPadding,
-  },
-  content: {
-    flex: 1,
-    backgroundColor: colors.background,
-    borderTopRightRadius: sizes.radius["3xl"],
-    borderTopLeftRadius: sizes.radius["3xl"],
-  },
-  listContainer: { paddingBottom: sizes.spacing["2xl"] },
-  emptyContainer: { flex: 1 },
-});
 
 export default ItemListScreen;

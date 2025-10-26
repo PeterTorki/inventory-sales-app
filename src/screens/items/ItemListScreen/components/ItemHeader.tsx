@@ -1,12 +1,12 @@
-// Inside same file, above ItemListScreen
 import React, { memo } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AppSearch from "../../../../components/AppSearch";
 import AppButton from "../../../../components/AppButton";
 import AppText from "../../../../components/AppText";
 import { colors } from "../../../../constants/colors";
 import { sizes } from "../../../../constants/sizes";
+import { itemHeaderStyles as styles } from "./styles";
 
 interface ItemHeaderProps {
   query: string;
@@ -18,17 +18,11 @@ interface ItemHeaderProps {
 
 const ItemHeader = memo(({ query, handleSearch, clearSearch, filteredCount, navigation }: ItemHeaderProps) => {
   return (
-    <View style={{ marginVertical: sizes.spacing.lg, marginBottom: sizes.spacing.md }}>
+    <View style={styles.headerContainer}>
       <AppSearch query={query} handleSearch={handleSearch} clearSearch={clearSearch} />
 
-      <View style={{ flexDirection: "column" }}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: sizes.spacing.md,
-            marginBottom: sizes.spacing.md,
-          }}>
+      <View style={styles.buttonRow}>
+        <View style={styles.topButtonRow}>
           <AppButton
             title="Categories"
             onPress={() => navigation.navigate("ItemsStack", { screen: "Category" })}
@@ -62,7 +56,7 @@ const ItemHeader = memo(({ query, handleSearch, clearSearch, filteredCount, navi
         />
       </View>
 
-      <View style={{ paddingVertical: sizes.spacing.sm }}>
+      <View style={styles.countContainer}>
         <AppText variant="body" color={colors.textSecondary}>
           {filteredCount} {filteredCount === 1 ? "item" : "items"} found
         </AppText>
