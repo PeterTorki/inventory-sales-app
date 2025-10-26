@@ -1,36 +1,19 @@
-import { Alert } from "react-native";
 import { getAllItems, deleteItem } from "../../../database/queries";
 import { Item } from "../../../types";
+import { createLoadDataService, createDeleteService } from "../../../utils/dataServices";
+
+const loadDataService = createLoadDataService<Item>(getAllItems, "Failed to load items");
 
 export const loadItems = (setItems: (items: Item[]) => void, setIsLoading: (loading: boolean) => void) => {
-  try {
-    setIsLoading(true);
-    const data = getAllItems();
-    setItems(data);
-  } catch (error) {
-    console.error("Error loading items:", error);
-    Alert.alert("Error", "Failed to load items");
-  } finally {
-    setIsLoading(false);
-  }
+  loadDataService(setItems, setIsLoading);
 };
 
+const deleteService = createDeleteService<Item>(
+  deleteItem,
+  "Item",
+  "Failed to delete item. It may be used in invoices."
+);
+
 export const handleDeleteItem = (item: Item, onSuccess: () => void) => {
-  Alert.alert("Delete Item", `Are you sure you want to delete "${item.name}"?`, [
-    { text: "Cancel", style: "cancel" },
-    {
-      text: "Delete",
-      style: "destructive",
-      onPress: () => {
-        try {
-          deleteItem(item.id);
-          Alert.alert("Success", "Item deleted successfully");
-          onSuccess();
-        } catch (error) {
-          console.error("Error deleting item:", error);
-          Alert.alert("Error", "Failed to delete item. It may be used in invoices.");
-        }
-      },
-    },
-  ]);
+  deleteService(item, onSuccess);
 };

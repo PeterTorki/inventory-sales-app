@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View, FlatList } from "react-native";
 import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import Header from "../../../components/Header";
+import EmptyState from "../../../components/EmptyState";
 import { Item } from "../../../types";
 import { ItemsStackParamList } from "../../../types/navigation/itemsStackTypes";
 import { useSearch } from "../../../hooks/useSearch";
@@ -9,7 +10,6 @@ import { loadItems, handleDeleteItem } from "./services";
 import { styles } from "./styles";
 import ItemHeader from "./components/ItemHeader";
 import ItemCard from "./components/ItemCard";
-import EmptyState from "./components/EmptyState";
 
 const ItemListScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<ItemsStackParamList>>();
@@ -54,7 +54,15 @@ const ItemListScreen: React.FC = () => {
             data={filteredData}
             renderItem={({ item }) => <ItemCard item={item} onEdit={handleEdit} onDelete={handleDelete} />}
             keyExtractor={(item) => item.id.toString()}
-            ListEmptyComponent={!isLoading ? EmptyState : null}
+            ListEmptyComponent={
+              !isLoading ? (
+                <EmptyState
+                  iconName="cube-outline"
+                  title="No items yet"
+                  subtitle="Add your first item to get started"
+                />
+              ) : null
+            }
             contentContainerStyle={
               filteredData.length === 0 && !isLoading ? styles.emptyContainer : styles.listContainer
             }
