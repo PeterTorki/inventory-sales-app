@@ -21,7 +21,7 @@ const ItemHeader = memo(({ query, handleSearch, clearSearch, filteredCount, navi
     <View style={{ marginVertical: sizes.spacing.lg, marginBottom: sizes.spacing.md }}>
       <AppSearch query={query} handleSearch={handleSearch} clearSearch={clearSearch} />
 
-      <View style={{ flexDirection: "column", alignItems: "center" }}>
+      <View style={{ flexDirection: "column" }}>
         <View
           style={{
             flexDirection: "row",
@@ -34,7 +34,9 @@ const ItemHeader = memo(({ query, handleSearch, clearSearch, filteredCount, navi
             onPress={() => navigation.navigate("ItemsStack", { screen: "Category" })}
             variant="outline"
             size="s"
+            color="text"
             width="48%"
+            backgroundColor="primaryLight"
             icon={<Ionicons name="folder-outline" size={18} color={colors.primaryDark} />}
           />
           <AppButton
@@ -42,7 +44,9 @@ const ItemHeader = memo(({ query, handleSearch, clearSearch, filteredCount, navi
             onPress={() => navigation.navigate("ItemsStack", { screen: "Inventory" })}
             variant="outline"
             size="s"
+            color="text"
             width="48%"
+            backgroundColor="primaryLight"
             icon={<Ionicons name="list-outline" size={18} color={colors.primaryDark} />}
           />
         </View>

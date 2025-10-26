@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { View, FlatList, StyleSheet, Alert } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import Header from "../../../components/Header";
 import { colors } from "../../../constants/colors";
 import { sizes } from "../../../constants/sizes";
@@ -13,7 +13,7 @@ import ItemCard from "./components/ItemCard";
 import EmptyState from "./components/EmptyState";
 
 const ItemListScreen: React.FC = () => {
-  const navigation = useNavigation<ItemsStackParamList>();
+  const navigation = useNavigation<NavigationProp<ItemsStackParamList>>();
   const [items, setItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
