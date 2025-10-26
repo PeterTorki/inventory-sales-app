@@ -1,9 +1,9 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TransactionsStackParamList } from "../types/navigation/transactionsStackTypes";
-import InvoiceListScreen from "../screens/transactions/InvoiceListScreen";
-import CreateInvoiceScreen from "../screens/transactions/CreateInvoiceScreen";
-import InvoiceDetailScreen from "../screens/transactions/InvoiceDetailScreen";
+import { InvoiceListScreen, CreateInvoiceScreen, InvoiceDetailScreen } from "../screens/transactions";
+import { withSafeArea } from "./withSafeArea";
+import { colors } from "../constants/colors";
 
 const TransactionsStack = createNativeStackNavigator<TransactionsStackParamList>();
 
@@ -14,12 +14,16 @@ const TransactionsNavigator: React.FC = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <TransactionsStack.Screen name="InvoiceList" component={InvoiceListScreen} options={{ title: "Invoices" }} />
       <TransactionsStack.Screen
-        name="CreateInvoice"
-        component={CreateInvoiceScreen}
-        options={{ title: "Create Invoice" }}
+        name="InvoiceList"
+        component={withSafeArea(InvoiceListScreen, {
+          scrollable: false,
+          noPadding: true,
+          backgroundColor: colors.primary,
+        })}
+        options={{ title: "Invoices" }}
       />
+
       <TransactionsStack.Screen
         name="InvoiceDetail"
         component={InvoiceDetailScreen}

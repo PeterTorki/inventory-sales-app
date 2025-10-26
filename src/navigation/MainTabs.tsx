@@ -10,7 +10,7 @@ import { hs, ms } from "../utils/metrics";
 import { MainTabProps } from "../types/navigation/mainStackTypes";
 import ItemListScreen from "../screens/items/ItemListScreen/ItemListScreen";
 import CustomerListScreen from "../screens/customers/CustomerListScreen";
-import InvoiceDetailScreen from "../screens/transactions/InvoiceDetailScreen";
+import TransactionsNavigator from "./TransactionsStack";
 import { withSafeArea } from "./withSafeArea";
 import CategoryScreen from "../screens/items/CategoryScreen/CategoryScreen";
 
@@ -95,11 +95,7 @@ const MainTabNavigator: React.FC<MainTabProps> = () => {
           title: "Transactions",
           tabBarIcon: ({ color, size, focused }) => getTabBarIcon({ color, size, focused }, "receipt-outline"),
         }}
-        component={withSafeArea(InvoiceDetailScreen, {
-          scrollable: false,
-          noPadding: true,
-          backgroundColor: colors.primary,
-        })}
+        component={TransactionsNavigator}
       />
     </MainTabs.Navigator>
   );

@@ -63,7 +63,7 @@ export const sharedListStyles = StyleSheet.create({
     paddingHorizontal: sizes.layout.containerPadding,
   },
   listContainer: {
-    paddingBottom: sizes.spacing["2xl"],
+    paddingBottom: sizes.spacing["6xl"],
   },
   emptyContainer: {
     flex: 1,

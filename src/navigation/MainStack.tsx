@@ -10,6 +10,7 @@ import { ItemFormScreen } from "../screens/items";
 import { TransactionsStackParamList } from "../types/navigation/transactionsStackTypes";
 import { CustomersStackParamList } from "../types/navigation/customersStackTypes";
 import CustomerFormScreen from "../screens/customers/CustomerFormScreen/CustomerFormScreen";
+import { CreateInvoiceScreen } from "../screens/transactions";
 const MainStack = createNativeStackNavigator<
   MainStackParamList & ItemsStackParamList & CustomersStackParamList & TransactionsStackParamList
 >();
@@ -31,6 +32,7 @@ const MainNavigator: React.FC = () => {
         <MainStack.Screen name="EditItem" component={ItemFormScreen} />
         <MainStack.Screen name="AddCustomer" component={CustomerFormScreen} />
         <MainStack.Screen name="EditCustomer" component={CustomerFormScreen} />
+        <MainStack.Screen name="CreateInvoice" component={CreateInvoiceScreen} options={{ title: "Create Invoice" }} />
       </MainStack.Group>
     </MainStack.Navigator>
   );
