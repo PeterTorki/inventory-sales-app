@@ -12,6 +12,7 @@ interface HeaderProps {
   title?: string;
   caption?: string;
   onBackPress?: () => void;
+  rightElement?: React.ReactNode;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -19,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   title = "Inventory & Sales App",
   caption = "Manage your inventory efficiently",
   onBackPress,
+  rightElement,
 }) => {
   const navigation = useNavigation();
 
@@ -67,6 +69,7 @@ const Header: React.FC<HeaderProps> = ({
             {caption}
           </AppText>
         </View>
+        {rightElement && <View>{rightElement}</View>}
       </View>
     </View>
   );

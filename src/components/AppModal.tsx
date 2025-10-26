@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     maxHeight: "auto",
   },
   scrollContent: {
+    height: 400,
     flexGrow: 1,
   },
   modalHeader: {
