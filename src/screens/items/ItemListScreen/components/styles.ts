@@ -42,7 +42,7 @@ export const itemCardStyles = StyleSheet.create({
     marginRight: sizes.spacing.md,
   },
   categoryBadge: {
-    backgroundColor: colors.primaryLight + "30",
+    backgroundColor: colors.primaryLight + "40",
     paddingHorizontal: sizes.spacing.sm,
     paddingVertical: vs(4),
     borderRadius: sizes.radius.sm,

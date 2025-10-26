@@ -21,7 +21,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onEdit, onDelete }) => (
           {item.name}
         </AppText>
         <View style={styles.categoryBadge}>
-          <AppText variant="caption" color={colors.primary}>
+          <AppText variant="caption" color={colors.textSecondary}>
             {item.category_name || "No Category"}
           </AppText>
         </View>

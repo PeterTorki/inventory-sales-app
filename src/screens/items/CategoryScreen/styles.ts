@@ -3,7 +3,7 @@ import { colors } from "../../../constants/colors";
 import { sizes } from "../../../constants/sizes";
 
 export const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: colors.primary },
   content: {
     flex: 1,
     paddingHorizontal: sizes.layout.containerPadding,
@@ -17,6 +17,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: sizes.spacing.lg,
   },
-  listContainer: { paddingBottom: sizes.spacing["2xl"] },
+  listContainer: { paddingBottom: sizes.spacing["6xl"] },
   emptyContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
 });

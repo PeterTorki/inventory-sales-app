@@ -16,7 +16,7 @@ import { styles } from "./styles";
 import { CategoryScreenProps } from "../../../types/navigation/itemsStackTypes";
 
 const CategoryScreen: React.FC<CategoryScreenProps> = ({ navigation, route }: CategoryScreenProps) => {
-  const { isAddCategory } = route.params;
+  const { isAddCategory } = route.params || {};
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(isAddCategory || false);

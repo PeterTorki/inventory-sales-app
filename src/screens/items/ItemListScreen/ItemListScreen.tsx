@@ -36,9 +36,11 @@ const ItemListScreen: React.FC = () => {
     handleDeleteItem(item, handleLoadItems);
   };
 
+  const isFromTab = navigation.canGoBack();
+
   return (
     <View style={styles.container}>
-      <Header title="Items" caption="Manage your inventory items" hasBack={false} />
+      <Header title="Items" caption="Manage your inventory items" hasBack={isFromTab} />
 
       <View style={styles.containerContent}>
         <ItemHeader
@@ -68,6 +70,7 @@ const ItemListScreen: React.FC = () => {
             }
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
+            // add padding to bottom to avoid last item being hidden behind bottom tab bar
             refreshing={isLoading}
             onRefresh={handleLoadItems}
           />

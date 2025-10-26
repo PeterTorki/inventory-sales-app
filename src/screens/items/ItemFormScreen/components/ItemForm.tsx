@@ -7,8 +7,9 @@ import ReusableDropdown from "../../../../components/ReusableDropdown";
 import { colors } from "../../../../constants/colors";
 import { sizes } from "../../../../constants/sizes";
 import { Category } from "../../../../types";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { ItemsStackParamList } from "../../../../types/navigation/itemsStackTypes";
 
 interface ItemFormProps {
   formData: {
@@ -46,7 +47,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
     value: cat.id,
   }));
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<ItemsStackParamList>>();
 
   return (
     <View style={styles.formCard}>
@@ -81,16 +82,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
           />
           <AppButton
             icon={<Ionicons name="add-circle-outline" size={20} color={colors.text} />}
-            // onPress={() => {
-            //   navigation.navigate(
-            //     "ItemsStack",
-            //     { screen: "Category" },
-            //     {
-            //       isAddCategory: true,
-            //     }
-            //   );
-            // }}
-            onPress={() => navigation.navigate("ItemsStack", { screen: "Category", params: { isAddCategory: true } })}
+            onPress={() => navigation.navigate("ItemsStack", { screen: "Category" })}
             size="s"
             width="auto"
             variant="primary"
