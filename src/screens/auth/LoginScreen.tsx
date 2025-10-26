@@ -26,7 +26,6 @@ interface LoginScreenProps {
   onLogin?: (email: string, password: string) => Promise<void>;
 }
 
-// Constants
 const INITIAL_FIELD_STATE: FormField = {
   value: "",
   error: "",
@@ -43,20 +42,18 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   const [form, setForm] = useState<LoginForm>(INITIAL_FORM_STATE);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Update field value
   const updateField = useCallback((field: keyof LoginForm, value: string) => {
     setForm((prev) => ({
       ...prev,
       [field]: {
         ...prev[field],
         value,
-        // Clear error when user starts typing
+
         error: prev[field].touched ? "" : prev[field].error,
       },
     }));
   }, []);
 
-  // Validate and mark field as touched
   const validateField = useCallback((field: keyof LoginForm) => {
     setForm((prev) => {
       const validator = field === "email" ? validateEmail : validatePassword;
@@ -73,7 +70,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     });
   }, []);
 
-  // Handle field blur
   const handleBlur = useCallback(
     (field: keyof LoginForm) => () => {
       validateField(field);
@@ -81,7 +77,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     [validateField]
   );
 
-  // Handle field change
   const handleChange = useCallback(
     (field: keyof LoginForm) => (value: string) => {
       updateField(field, value);
@@ -89,7 +84,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     [updateField]
   );
 
-  // Validate all fields
   const validateForm = useCallback((): boolean => {
     const emailError = validateEmail(form.email.value);
     const passwordError = validatePassword(form.password.value);
@@ -102,7 +96,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     return !emailError && !passwordError;
   }, [form.email.value, form.password.value]);
 
-  // Set server error
   const setServerError = useCallback((message: string) => {
     setForm((prev) => ({
       ...prev,
@@ -113,7 +106,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     }));
   }, []);
 
-  // Handle login
   const handleLogin = useCallback(async () => {
     if (!validateForm()) {
       return;
