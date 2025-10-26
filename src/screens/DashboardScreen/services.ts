@@ -30,7 +30,6 @@ export const useOverviewCards = (): CardItem[] => {
 
   useFocusEffect(
     useCallback(() => {
-      // Fetch stats when screen comes into focus
       const items = getItemCount();
       const customers = getCustomerCount();
       const invoices = getInvoiceCount();
@@ -101,7 +100,7 @@ export const useQuickActionCards = (): CardItem[] => {
       color: colors.text,
       backgroundColor: colors.infoLight,
       width: width < 400 ? "100%" : "48%",
-      // onPress: () => navigation.navigate("CreateInvoice"),
+
       onPress: () => navigation.navigate("TransactionsStack", { screen: "CreateInvoice" }),
     },
     {
