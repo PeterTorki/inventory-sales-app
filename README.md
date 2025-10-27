@@ -2,6 +2,10 @@
 
 A comprehensive mobile application built with React Native and Expo for managing inventory, customers, and sales transactions. This app provides an intuitive interface for small to medium-sized businesses to track their products, manage customer relationships, and process sales invoices efficiently.
 
+## Demo
+
+📹 [Watch Demo Video](https://drive.google.com/file/d/1Uf6qli9dn1zlK3MQfAaiFfGUDtmQHM1n/view?usp=drive_link)
+
 ## Features
 
 - **User Authentication**: Secure login system with encrypted credential storage

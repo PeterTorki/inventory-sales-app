@@ -4,9 +4,8 @@ import AppText from "../../../components/AppText";
 import { colors } from "../../../constants/colors";
 import { sizes } from "../../../constants/sizes";
 import Card from "./Card";
-import { CardItem } from "../services";
+import { CardItem } from "../../../types/dashboardTypes";
 import { styles } from "../styles";
-import { MainStackParamList } from "../../../types/navigation/mainStackTypes";
 
 interface CardsDivProps {
   title: string;

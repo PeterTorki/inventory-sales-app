@@ -7,16 +7,7 @@ import { useEffect, useState } from "react";
 import { getItemCount, getCustomerCount, getInvoiceCount } from "../../database/queries";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
-
-export interface CardItem {
-  title: string;
-  value: string | number;
-  iconName: keyof typeof Ionicons.glyphMap;
-  color?: keyof typeof colors | string;
-  backgroundColor?: keyof typeof colors | string;
-  width: number | string;
-  onPress?: () => void;
-}
+import { CardItem } from "../../types/dashboardTypes";
 
 export const useOverviewCards = (): CardItem[] => {
   const navigation = useNavigation<any>();

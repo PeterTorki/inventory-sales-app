@@ -1,13 +1,14 @@
 import React from "react";
-import { View, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../constants/colors";
-import { sizes } from "../../constants/sizes";
 import Header from "../../components/Header";
 import CardsDiv from "./components/CardsDiv";
 import { useOverviewCards, useQuickActionCards } from "./services";
 import { useAuth } from "../../context/AuthContext";
 import AppButton from "../../components/AppButton";
+import { styles } from "./styles";
+import { Alert } from "react-native";
 
 interface DashboardScreenProps {}
 
@@ -33,7 +34,7 @@ const DashboardScreen: React.FC<DashboardScreenProps> = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "transparent" }}>
+    <View style={styles.container}>
       <Header
         title="Dashboard"
         caption="Overview of your activities"
@@ -49,13 +50,8 @@ const DashboardScreen: React.FC<DashboardScreenProps> = () => {
         }
       />
       <ScrollView
-        style={{
-          flex: 1,
-          backgroundColor: colors.background,
-          borderTopRightRadius: sizes.radius["3xl"],
-          borderTopLeftRadius: sizes.radius["3xl"],
-        }}
-        contentContainerStyle={{ paddingBottom: sizes.spacing.lg }}
+        style={styles.scrollContainer}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
         <CardsDiv title="Overview" cards={overViewCards} />
         <CardsDiv title="Quick Actions" cards={quickActionCards} />

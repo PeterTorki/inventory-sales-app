@@ -3,25 +3,8 @@ import { View } from "react-native";
 import AppText from "../../../../components/AppText";
 import AppInput from "../../../../components/AppInput";
 import AppButton from "../../../../components/AppButton";
+import { CustomerFormProps } from "../../../../types/customerTypes";
 import { customerFormStyles as styles } from "./styles";
-
-interface CustomerFormProps {
-  formData: {
-    name: string;
-    phone: string;
-    email: string;
-  };
-  errors: {
-    name: string;
-    phone: string;
-    email: string;
-  };
-  isLoading: boolean;
-  buttonTitle: string;
-  updateField: (field: string, value: string) => void;
-  onSubmit: () => void;
-  onCancel: () => void;
-}
 
 const CustomerForm: React.FC<CustomerFormProps> = ({
   formData,

@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from "react";
-import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator } from "react-native";
+import { View, ScrollView, KeyboardAvoidingView, Platform, ActivityIndicator } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../../components/Header";
 import AppText from "../../../components/AppText";
 import { colors } from "../../../constants/colors";
-import { sizes } from "../../../constants/sizes";
 import { loadFormData, validateForm, submitForm } from "./services";
+import { styles } from "./styles";
 import CustomerForm from "./components/customerForm";
 
 type CustomerFormScreenProps = any;
@@ -87,31 +87,5 @@ const CustomerFormScreen: React.FC<CustomerFormScreenProps> = ({ navigation, rou
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.primary,
-  },
-  scrollContainer: {
-    flex: 1,
-    backgroundColor: colors.surface,
-    borderTopRightRadius: sizes.radius["3xl"],
-    borderTopLeftRadius: sizes.radius["3xl"],
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingHorizontal: sizes.layout.containerPadding,
-    paddingBottom: sizes.spacing["6xl"],
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  loadingText: {
-    marginTop: sizes.spacing.md,
-  },
-});
 
 export default CustomerFormScreen;

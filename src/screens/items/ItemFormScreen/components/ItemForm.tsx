@@ -1,36 +1,16 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import AppText from "../../../../components/AppText";
 import AppInput from "../../../../components/AppInput";
 import AppButton from "../../../../components/AppButton";
 import ReusableDropdown from "../../../../components/ReusableDropdown";
 import { colors } from "../../../../constants/colors";
 import { sizes } from "../../../../constants/sizes";
-import { Category } from "../../../../types";
+import { ItemFormProps } from "../../../../types/itemTypes";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { ItemsStackParamList } from "../../../../types/navigation/itemsStackTypes";
-
-interface ItemFormProps {
-  formData: {
-    name: string;
-    category_id: number | null;
-    price: string;
-    quantity: string;
-  };
-  errors: {
-    name: string;
-    category_id: string;
-    price: string;
-    quantity: string;
-  };
-  categories: Category[];
-  isLoading: boolean;
-  buttonTitle: string;
-  updateField: (field: string, value: any) => void;
-  onSubmit: () => void;
-  onCancel: () => void;
-}
+import { itemFormStyles as styles } from "./styles";
 
 const ItemForm: React.FC<ItemFormProps> = ({
   formData,
@@ -79,10 +59,11 @@ const ItemForm: React.FC<ItemFormProps> = ({
               updateField("category_id", typeof item.value === "string" ? parseInt(item.value) : item.value);
             }}
             placeholder="Select category"
+            dropInDirection="column"
           />
           <AppButton
             icon={<Ionicons name="add-circle-outline" size={20} color={colors.text} />}
-            onPress={() => navigation.navigate("ItemsStack", { screen: "Category" })}
+            onPress={() => navigation.navigate("Category", { isAddCategory: true })}
             size="s"
             width="auto"
             variant="primary"
@@ -123,28 +104,5 @@ const ItemForm: React.FC<ItemFormProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  formCard: {
-    backgroundColor: colors.surface,
-    borderRadius: sizes.radius["2xl"],
-    padding: sizes.spacing.xl,
-    marginTop: sizes.spacing.lg,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  sectionTitle: {
-    marginBottom: sizes.spacing.lg,
-  },
-  buttonGroup: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: sizes.spacing.md,
-    marginTop: sizes.spacing.xl,
-  },
-});
 
 export default ItemForm;

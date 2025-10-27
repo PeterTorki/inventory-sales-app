@@ -1,22 +1,12 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import AppText from "../../../components/AppText";
 import { Ionicons } from "@expo/vector-icons";
 import { sizes } from "../../../constants/sizes";
 import { colors } from "../../../constants/colors";
 import { typography } from "../../../constants/fonts";
-
-interface CardProps {
-  title: string;
-  value: string | number;
-  caption?: string;
-  iconName: keyof typeof Ionicons.glyphMap;
-  color?: keyof typeof colors | string;
-  backgroundColor?: keyof typeof colors | string;
-  style?: any;
-  pressable?: boolean;
-  onPress?: () => void;
-}
+import { CardProps } from "../../../types/dashboardTypes";
+import { cardStyles as styles } from "./styles";
 
 const Card: React.FC<CardProps> = ({
   title,
@@ -76,18 +66,5 @@ const Card: React.FC<CardProps> = ({
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    borderRadius: sizes.radius["2xl"],
-    gap: sizes.spacing.lg,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "nowrap",
-  },
-});
 
 export default Card;

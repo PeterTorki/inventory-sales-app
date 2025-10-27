@@ -10,21 +10,7 @@ import LoginFooter from "./components/LoginFooter";
 import { validateEmail, validatePassword } from "./services";
 import { styles } from "./styles";
 import { useAuth } from "../../context/AuthContext";
-
-interface FormField {
-  value: string;
-  error: string;
-  touched: boolean;
-}
-
-interface LoginForm {
-  email: FormField;
-  password: FormField;
-}
-
-interface LoginScreenProps {
-  onLogin?: (email: string, password: string) => Promise<void>;
-}
+import { FormField, LoginForm, LoginScreenProps } from "../../types/authTypes";
 
 const INITIAL_FIELD_STATE: FormField = {
   value: "",
